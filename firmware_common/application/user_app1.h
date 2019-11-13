@@ -19,6 +19,7 @@ Header file for user_app1.c
 
 #ifndef __USER_APP1_H
 #define __USER_APP1_H
+#define U32_COUNTER_PERIOD_MS     (u32)500
 
 /**********************************************************************************************************************
 Type Definitions

@@ -138,12 +138,24 @@ static void UserApp1SM_Idle(void)
 {
   static u32 u32Counter = 0;
   static bool bLightIsOn = FALSE;
+  static u32 u32QuickerSlower = 2; //don't want to divide by zero
   
   /* Increment u32Counter every 1ms cycle */
   u32Counter++;
   
+  //this increment every 2 seconds
+  
+  if (G_u32SystemTime1ms %2000 == 0)
+  {
+    if(G_u32SystemTime1ms %28000 <= 14000)
+      u32QuickerSlower *= 2;
+    else
+      u32QuickerSlower /= 2;
+    
+  }
+  
   /* Check and roll over */
-  if(u32Counter == U32_COUNTER_PERIOD_MS)
+  if(u32Counter >=U32_COUNTER_PERIOD_MS /(u32QuickerSlower))
   {
     u32Counter = 0;
     
